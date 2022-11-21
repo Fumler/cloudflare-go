@@ -28,7 +28,7 @@ var (
 type StreamVideo struct {
 	AllowedOrigins        []string                 `json:"allowedOrigins,omitempty"`
 	Created               *time.Time               `json:"created,omitempty"`
-	Duration              int                      `json:"duration,omitempty"`
+	Duration              float64                  `json:"duration,omitempty"`
 	Input                 StreamVideoInput         `json:"input,omitempty"`
 	MaxDurationSeconds    int                      `json:"maxDurationSeconds,omitempty"`
 	Meta                  map[string]interface{}   `json:"meta,omitempty"`
@@ -367,7 +367,6 @@ func (api *API) StreamEmbedHTML(ctx context.Context, options StreamParameters) (
 	uri := fmt.Sprintf("/accounts/%s/stream/%s/embed", options.AccountID, options.VideoID)
 
 	res, err := api.makeRequestContext(ctx, http.MethodGet, uri, nil)
-
 	if err != nil {
 		return "", err
 	}
@@ -432,7 +431,6 @@ func (api *API) StreamCreateSignedURL(ctx context.Context, params StreamSignedUR
 	uri := fmt.Sprintf("/accounts/%s/stream/%s/token", params.AccountID, params.VideoID)
 
 	res, err := api.makeRequestContext(ctx, http.MethodPost, uri, params)
-
 	if err != nil {
 		return "", err
 	}
